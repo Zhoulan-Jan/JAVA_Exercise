@@ -9,6 +9,6 @@ public class Num{
         if ( n > 9 ){
             Print( n / 10);
         }
-         System.out.println(n % 10);
+        System.out.println(n % 10);  //加上else就没有回溯过程了
     }
 }
