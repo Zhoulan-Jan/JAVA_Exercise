@@ -40,33 +40,23 @@ public class Test {
         int numEng = 0;
         int numSc = 0;
 
-        //找计算机专业学生数量
+
         for (Person x:pers){
+            //找计算机专业学生数量
             if (x.profession.equals("computer")){
                 numCom++;
                 if(x.sex.equals("女")){
                     girl1++;
                 }
             }
-        }
-        System.out.println("计算机专业女生数量：" + girl1);
-        System.out.println("计算机专业男生数量："+(numCom-girl1));
-
-        //找科学专业学生数量
-        for (Person x:pers){
+            //找科学专业学生数量
             if (x.profession.equals("science")){
                 numSc++;
                 if(x.sex.equals("女")){
                     girl2++;
                 }
             }
-        }
-        System.out.println("科学专业女生数量：" + girl2);
-        System.out.println("科学专业男生数量："+(numSc-girl2));
-
-        //找英语专业学生数量
-        for (Person x:pers){
-            girl3 = 0;
+            //找英语专业学生数量
             if (x.profession.equals("English")){
                 numEng++;
                 if(x.sex.equals("女")){
@@ -74,6 +64,12 @@ public class Test {
                 }
             }
         }
+        System.out.println("计算机专业女生数量：" + girl1);
+        System.out.println("计算机专业男生数量："+(numCom-girl1));
+
+        System.out.println("科学专业女生数量：" + girl2);
+        System.out.println("科学专业男生数量："+(numSc-girl2));
+
         System.out.println("英语专业女生数量：" + girl3);
         System.out.println("英语专业男生数量："+(numEng-girl3));
     }
