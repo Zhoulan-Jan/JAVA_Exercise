@@ -7,6 +7,8 @@ public class Test {
         testSearch();
         testgetPos();
         testsetPos();
+        testRemove();
+        testSize();
     }
 
 
@@ -88,9 +90,44 @@ public class Test {
         slist.add(3,88);
         slist.add(3,99);
         slist.setPos(3,100);
-        System.out.print("预期结果是:" );
-        slist.display();
+        System.out.print("预期结果是:" + "[11,22,33,100,88,44,55,66,77]" );
         System.out.print("实际结果是：");
         slist.display();
     }
+
+    public static void testRemove(){
+        System.out.print("这是一个remove方法：");
+        SeqList slist = new SeqList();
+        slist.add(0,11);
+        slist.add(1,22);
+        slist.add(2,33);
+        slist.add(3,44);
+        slist.add(4,55);
+        slist.add(5,66);
+        slist.add(6,77);
+        slist.add(3,88);
+        slist.add(3,99);
+        slist.remove(44);
+        System.out.print("预期结果是:" + "[11,22,33,99,88,55,66,77]");
+        System.out.print("实际结果是：");
+        slist.display();
+    }
+
+    public static void testSize(){
+        System.out.print("这是一个size方法：");
+        SeqList slist = new SeqList();
+        slist.add(0,11);
+        slist.add(1,22);
+        slist.add(2,33);
+        slist.add(3,44);
+        slist.add(4,55);
+        slist.add(5,66);
+        slist.add(6,77);
+        slist.add(3,88);
+        slist.add(3,99);
+        slist.remove(44);
+        int result = slist.size();
+        System.out.print("预期结果是8，实际结果是：" + result);
+    }
+
 }

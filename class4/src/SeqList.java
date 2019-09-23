@@ -78,10 +78,33 @@ public class SeqList {
     }
 
     //删除第一次出现的关键字key
+    public void remove(int key)  {
+        //找到该数字
+        int pos = search(key);
+        if (pos == -1) {
+            return;
+        }
+        //尾删
+        else if (pos == this.size - 1) {
+            this.size--;
+        }
+        //中间位置删除
+        else {
+            for (int i = pos; i < this.size - 1; i++) {
+                this.data[i] = this.data[i + 1];
+            }
+            this.size--;
+        }
+    }
 
     //获取顺序表长度
+    public int size() {
+        return this.size;
+    }
 
     //清空顺序表
-
+    public void clear() {
+        this.size = 0;
+    }
 }
 
