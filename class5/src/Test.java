@@ -8,6 +8,7 @@ public class Test {
         testcontains();
         testremove();
         testremoveAllKey();
+        testremoveElements();
     }
 
     public static void testaddFirst(){
@@ -93,6 +94,7 @@ public class Test {
         System.out.println("测试removeAllKey方法：");
         LinkedList klist = new LinkedList();
         klist.addLast(5);
+        klist.addLast(5);
         klist.addLast(4);
         klist.addLast(3);
         klist.addLast(3);
@@ -100,8 +102,25 @@ public class Test {
         klist.addLast(1);
         klist.addLast(3);
         klist.addLast(1);
+        klist.removeAllKey(5);
         klist.removeAllKey(1);
-        System.out.print("预期结果是[5,4,3,3,2,3], 实际是：");
+        System.out.print("预期结果是[4,3,3,2,3], 实际是：");
+        klist.display();
+    }
+
+    public static void testremoveElements(){
+        System.out.println("测试removeElments方法：");
+        LinkedList klist = new LinkedList();
+        klist.addLast(55);
+        klist.addLast(55);
+        klist.addLast(77);
+        klist.addLast(55);
+        klist.addLast(88);
+        klist.addLast(77);
+        klist.addLast(99);
+                                                                        //找到klist的第一个结点?
+        LinkNode list = klist.removeElements(55);
+        System.out.print("预期结果是[77,88,77,99], 实际是：");
         klist.display();
     }
 

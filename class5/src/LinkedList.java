@@ -128,21 +128,50 @@ public class LinkedList {
         //空链表
         if (this.head == null) return;
         //头节点
-        else if (this.head.data == key) {
-            this.head = this.head.next;
+        LinkNode x = head;
+        while (x.data == key && x != null) {
+            x = x.next;
         }
+        head = x;
         //中间节点
-        else {
-            LinkNode cur = this.head;
+        LinkNode cur = this.head;
+        while (cur != null) {
+            LinkNode prev = findPrevNodeValue(key);
+            if (prev == null) return;
+            else{
+                prev.next = prev.next.next;
+            }
+            cur = cur.next;
+        }
+    }
+
+    //有返回值的删除为key的结点
+    public  LinkNode removeElements(int key) {
+        //空链表
+        if (this.head == null) return head;
+        //头节点 error  假如头节点连着n个都是key  无法删除
+//        if (this.head.data == key) {
+//            this.head = this.head.next;
+//        }
+        //头节点及后面
+        LinkNode x = this.head;
+        if (x.data == key) {
+            while (x != null && x.data == key) {
+                x = x.next;
+            }
+        }
+        head = x;
+        //中间节点
+        LinkNode cur = this.head;
             while (cur != null) {
                 LinkNode prev = findPrevNodeValue(key);
-                if (prev == null) return;
-                else{
+                if (prev == null) return head;
+                else {
                     prev.next = prev.next.next;
                 }
                 cur = cur.next;
             }
-        }
+        return head;
     }
 
     //根据下标找节点
