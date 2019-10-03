@@ -1,4 +1,5 @@
 import java.nio.channels.MembershipKey;
+import java.util.MissingFormatArgumentException;
 
 public class Test {
     public static void main(String[] args) {
@@ -33,12 +34,21 @@ public class Test {
     public static void testidnum() {
         Mankind Cora = new Mankind();
         Mankind Lisa = new Mankind();
+        Mankind Harry = new Mankind();
+        Mankind Ron = new Mankind();
+        Mankind Jerry = new Mankind();
 
         System.out.println("测试setIdnum：");
         Lisa.setIdnum("34052419800101001X");
         Cora.setIdnum("340524198001010018");
+        Harry.setIdnum("340524192001010018");
+        Ron.setIdnum("340524198015010018");
+        Jerry.setIdnum("34052419800133001X");
         System.out.println("Lisa的身份证号是：" + Lisa.getIdnum());
         System.out.println("Cora的身份证号是：" + Cora.getIdnum());
+        System.out.println("Harry的身份证号是：" + Harry.getIdnum());
+        System.out.println("Ron的身份证号是：" + Ron.getIdnum());
+        System.out.println("Jerry的身份证号是：" + Jerry.getIdnum());
     }
 
     public static void testConstruction(){

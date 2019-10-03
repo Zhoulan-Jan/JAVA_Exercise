@@ -59,10 +59,16 @@ public class Mankind {
                      //this.idnum = idnum;
         if (idnum.length() == 18) {
             if (checkCode(idnum) == true) {
-                this.idnum = idnum;
+                if (checkYears(idnum) == true) {
+                    this.idnum = idnum;
+                } else {
+                    System.out.println("身份证年份输入错误");
+                }
+            } else {
+                System.out.println("身份证校验码输入错误");
             }
         } else {
-            System.out.println("身份证输入错误");
+            System.out.println("身份证长度输入错误");
         }
     }
 
@@ -84,11 +90,47 @@ public class Mankind {
     }
 
     //身份证年份
-//    public static boolean checkYears(String id) {
-//        //非闰年
-//        int[] day = {0,31,28,31,30,31,30,31,31,30,31,30,31};
-//
-//    }
+    public static boolean checkYears(String id) {
+        int years = (id.charAt(6)-'0') * 1000 + (id.charAt(7)-'0') * 100 + (id.charAt(8)-'0') * 10 + (id.charAt(9)-'0') ;
+        if (years >= 1949 && years < 2020) {  //年份正确
+            int month = (id.charAt(10) - '0') * 10 + (id.charAt(11) - '0');
+            if (month > 0 && month < 13) {
+                int day = (id.charAt(12) - '0') * 10 + (id.charAt(13) - '0');
+                //非闰年
+                if (!leapYear(years)) {
+                    int[] days = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+                    if (day > 0 && day <= days[month]) {
+                        return true;
+                    }
+                }
+                //闰年
+                if (leapYear(years)) {
+                    int[] days = {0,31,29,31,30,31,30,31,31,30,31,30,31};
+                    if (day > 0 && day <= days[month]) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //判断闰年
+    public static boolean leapYear(int year) {
+        if (year % 100 == 0) {
+            if (year % 400 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (year % 4 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     //getter
     public String getName() {
