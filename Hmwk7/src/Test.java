@@ -41,9 +41,9 @@ public class Test {
         System.out.println("测试setIdnum：");
         Lisa.setIdnum("34052419800101001X");
         Cora.setIdnum("340524198001010018");
-        Harry.setIdnum("340524192001010018");
-        Ron.setIdnum("340524198015010018");
-        Jerry.setIdnum("34052419800133001X");
+        Harry.setIdnum("340524192001010012");
+        Ron.setIdnum("340524198015010010");
+        Jerry.setIdnum("340524198001330013");
         System.out.println("Lisa的身份证号是：" + Lisa.getIdnum());
         System.out.println("Cora的身份证号是：" + Cora.getIdnum());
         System.out.println("Harry的身份证号是：" + Harry.getIdnum());
