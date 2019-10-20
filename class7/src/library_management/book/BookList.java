@@ -25,7 +25,7 @@ public class BookList {
          books[index] = newBook;  //领悟一下
     }
 
-    public static int getSize() {
+    public int getSize() {
         return size;
     }
 

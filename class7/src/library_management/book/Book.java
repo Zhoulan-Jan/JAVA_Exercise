@@ -14,4 +14,8 @@ public class Book {
         this.type = type;
         this.isBorrowed = isBorrowed;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
