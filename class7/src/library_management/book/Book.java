@@ -18,4 +18,24 @@ public class Book {
     public String getTitle() {
         return title;
     }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
+    }
+
+    @Override
+    public String toString() {
+        //return super.toString();
+        return "Book{" +
+                "name='" + title + '\'' +
+                ", id='" + num + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
+                ", isBorrowed=" + isBorrowed +
+                '}';
+    }
 }

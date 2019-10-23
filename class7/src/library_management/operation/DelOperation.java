@@ -16,15 +16,17 @@ public class DelOperation implements IOperation {
         for (; i < bookList.getSize(); i++) {
             Book book = bookList.getBooks(i);
             if (oldTitle.equals(book.getTitle())) {
-                break;
+                //用最后一本书覆盖这本书
+                Book lastBook = bookList.getBooks(bookList.getSize()-1);
+                bookList.setBook(i,lastBook);
+                bookList.setSize(bookList.getSize()-1);
+                System.out.println("删除成功！");
+                break;//就这个要写break；
             }
         }
         //没找到的情况
-        if (i > bookList.getSize()) {
-            System.out.println("没找到");
+        if (i > bookList.getSize()) {  //会显示未找到该书
+            System.out.println("没找到该书");
         }
-        //用最后一本书覆盖这本书
-        Book lastBook = bookList.getBooks(bookList.getSize()-1);
-        bookList.setBooks(i,lastBook);
     }
 }

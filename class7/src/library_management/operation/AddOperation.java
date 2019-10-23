@@ -20,7 +20,7 @@ public class AddOperation implements IOperation{
         String newType = sc.next();
         Book newBook = new Book(newTitle, newNum, newAuthor, newType, false);
         //在书库里增加新书籍，注意书库的书总量+1
-        bookList.setBooks(bookList.getSize(), newBook);
+        bookList.setBook(bookList.getSize(), newBook);
         bookList.setSize(bookList.getSize() + 1);
     }
 }

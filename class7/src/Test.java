@@ -12,10 +12,10 @@ public class Test {
         //2.创建用户，用户登录
         User user = login();
         //3.主循环
-//        while (true) {
-//            int choice = user.menu();  //menu方法是抽象方法，public留着是对的  去掉就错了
-//            user.doOperation(choice,bookList);
-//        }
+        while (true) {
+            int choice = user.menu();  //menu方法是抽象方法，public留着是对的  去掉就错了
+            user.doOperation(choice,bookList);
+        }
     }
 
     public static User login() {

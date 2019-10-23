@@ -1,11 +1,20 @@
 package library_management.user;
 
+import library_management.operation.*;
+
 import java.util.Scanner;
 
 public class Admin extends User{
 
     public Admin(String name) {
         super(name);
+        operations = new IOperation[] { //为什么构造方法可以这么写啊
+                new ExitOperation(),
+                new FindOperation(),
+                new AddOperation(),
+                new DelOperation(),
+                new PrintAllOperation()
+        };
     }
 
     @Override

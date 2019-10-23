@@ -14,7 +14,7 @@ public class FindOperation implements IOperation {
         int cntBook = 0;
         for (int i = 0; i < bookList.getSize(); i++) {
             Book book = bookList.getBooks(i);   //已入库的书籍
-            if (book.getTitle().equals(BookTitle)) { //已入库的书籍跟待查找的书籍
+            if (book.getTitle().equals(BookTitle)) { //已入库的书籍跟待查找的书籍book.getTitle().equals(BookTitle)
                 System.out.println(book);  //toString要在哪里写
                 cntBook++;
             }

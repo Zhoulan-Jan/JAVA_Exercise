@@ -14,6 +14,7 @@ public class BookList {
                 "JK罗琳","现代小说",false);
         books[3]=new Book("三体","004",
                 "刘慈欣","现代小说",false);
+        size = 4;
     }
 
     //对于书籍，要做到根据下标找到书
@@ -21,15 +22,14 @@ public class BookList {
         return books[index];
     }
 
-    public void setBooks(int index,Book newBook) {
+    public void setBook(int index,Book newBook) {
          books[index] = newBook;  //领悟一下
     }
 
-    public int getSize() {
-        return size;
-    }
+    public int getSize() { return size; }
 
     public void setSize(int size) {
         this.size = size;
     }
+
 }

@@ -18,11 +18,12 @@ public class BorrowOperation implements IOperation {
                 if (book.isBorrowed()) {
                     System.out.println("已借阅！");
                 } else {
-                    book.setBorrowed(false);
+                    book.setBorrowed(true);
+                    System.out.println("借阅成功！");
                 }
             }
         }
-        if (i >= bookList.getSize()) {
+        if (i > bookList.getSize()) {
             System.out.println("未找到该书");
         }
     }

@@ -19,8 +19,8 @@ public abstract class User {
     //选择哪个操作
     public abstract int menu(); //抽象方法 注定被覆写
     //根据操作选择类执行//不懂
-//    public void doOperation(int choice, BookList bookList) {
-//        operations[choice].work(bookList);
-//    }
+    public void doOperation(int choice, BookList bookList) {
+        operations[choice].work(bookList);
+    }
 
 }
