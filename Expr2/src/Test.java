@@ -1,7 +1,13 @@
 import skd.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         testOne();
         testTwo();
         testFour();
@@ -9,6 +15,18 @@ public class Test {
         testSix();
         testSeven();
         testEight();
+        testNine();
+        //下面是日历测试代码
+//        Calendar cal = Calendar.getInstance();
+//        //cal.set(Calendar.DAY_OF_WEEK,Calendar.JANUARY);  //确定月份 Jan 30 Feb 31 March 31
+//        cal.set(Calendar.DAY_OF_MONTH,Calendar.JANUARY);
+//        cal.set(Calendar.DAY_OF_YEAR,2018);
+//        System.out.println(cal.get(Calendar.MONTH)); //得到月份  怎么修改都是9？？
+//        System.out.println(cal.get(Calendar.YEAR)); //2019
+//        int days = cal.getActualMaximum(Calendar.DATE);
+//        System.out.println("days = " + days);
+//        int startDay = cal.get(Calendar.DAY_OF_WEEK); //这个函数不对啊aaa
+//        System.out.println(startDay);//6  六 0  日 1 一 2 二 3 三 4 四 5 五 6
     }
 
     public static void testOne() {
@@ -64,5 +82,18 @@ public class Test {
         Course course = new Course("001",
                 "离散","4.5");
         System.out.println(course.printCourseInfo());
+    }
+
+    public static void testNine() {
+        System.out.println("测试第九题：");
+        Acount acount = new Acount();
+        acount.setId(1122);
+        acount.setBalance(20000);
+        acount.setAnnualInterestRate(0.045);
+        acount.withDraw(2500);
+        acount.deposit(3000);
+        System.out.println("余额为：" + acount.getBalance());
+        System.out.println("月利率为：" + acount.getMonthlyInterestRate());
+        System.out.println("开户日期为：" + acount.getDateCreated());
     }
 }
