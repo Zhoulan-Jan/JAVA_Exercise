@@ -60,4 +60,69 @@ public class BinaryTree {
         postOrderTraversal(root.right);
         System.out.print(root.val);
     }
+
+    //求结点个数
+    static int node = 0;
+    public void getNode1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        node++;
+        getNode1(root.left);
+        getNode1(root.right);
+    }
+
+    public int getNode2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        return 1+getNode2(root.left) + getNode2(root.right);
+    }
+
+    //求叶子结点
+    static int leafNode = 0;
+    public void getLeafNode1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (root.left == null && root.right == null) {
+            leafNode++;
+        }
+        getLeafNode1(root.left);
+        getLeafNode1(root.right);
+    }
+
+    public int getLeafNode2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.right == null && root.left == null) {
+            return 1;
+        }
+        return getLeafNode2(root.left) + getLeafNode2(root.right);
+    }
+
+    //求第k层结点个数
+    //左子树第k-1层结点个数+右子树第k+1层结点个数
+    //需要考虑k>树的高度？
+    public int getLevelSize(TreeNode root, int k) {
+        if (root == null || k == 0) {
+            return 0;
+        }
+        if (k == 1) {
+            return 1;
+        }
+        return getLevelSize(root.left,k-1) + getLevelSize(root.right,k-1);
+    }
+
+    //查找val所在结点
+    public TreeNode find(TreeNode root, char value) {
+        if (value == root.val) {
+            return root;
+        }
+        return find(root.left,value);
+    }
 }
