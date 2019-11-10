@@ -120,9 +120,17 @@ public class BinaryTree {
 
     //查找val所在结点
     public TreeNode find(TreeNode root, char value) {
+        if (root == null) {
+            return null;
+        }
         if (value == root.val) {
             return root;
         }
-        return find(root.left,value);
+        TreeNode left = find(root.left, value);
+        if (left == null) {
+            return find(root.right, value);
+        } else {
+            return left;
+        }
     }
 }
