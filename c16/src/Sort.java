@@ -60,6 +60,18 @@ public class Sort {
         arr[y] = tmp;
     }
 
+    //合并排序
+    public static void mergeSort(int[] arr) {
+        mergeSortHelper(arr, 0, arr.length);
+    }
+
+    private static void mergeSortHelper(int[] arr, int left, int right) {
+        if (left > right) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSortHelper();
+    }
     public static void main(String[] args) {
         int[] array = {4,5,7,9,1,2,10,3,6};
         //insertSort(array);
