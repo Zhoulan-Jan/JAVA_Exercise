@@ -1,13 +1,25 @@
 import java.util.Scanner;
 
 public class Banker {
-    int[] available = {3,3,2}; //可利用资源向量
-    int[][] max = {{7,5,3},{3,2,2},{9,0,2},{2,2,2},{4,3,3}}; //最大需求矩阵
-    int[][] alloction = {{0,1,0},{2,0,0},{3,0,2},{2,1,1},{0,0,2}}; //分配矩阵
-    int[][] need = new int[5][3]; //需求矩阵 need = max - alloction
+    int processNum = 0;
+    int resourceNum = 0;
 
-    int processNum = 5;
-    int resourceNum = 3;
+    public void setProcessNum(int processNum) {
+        this.processNum = processNum;
+    }
+    
+    public void setResourceNum(int resourceNum) {
+        this.resourceNum = resourceNum;
+    }
+    //    int[] available = {3,3,2}; //可利用资源向量
+//    int[][] max = {{7,5,3},{3,2,2},{9,0,2},{2,2,2},{4,3,3}}; //最大需求矩阵
+//    int[][] alloction = {{0,1,0},{2,0,0},{3,0,2},{2,1,1},{0,0,2}}; //分配矩阵
+//    int[][] need = new int[5][3]; //需求矩阵 need = max - alloction
+
+    int[][] max = new int[processNum][resourceNum];
+    int[][] alloction = new int[processNum][resourceNum];
+    int[][] need = new int[processNum][resourceNum];
+    int[] available = new int[resourceNum];
 
     //int[][] request = new int[3][3]; //请求向量
     //int[] work = new int[3]; //工作向量
@@ -35,12 +47,13 @@ public class Banker {
         boolean[] finish = new boolean[processNum]; //长度为进程的个数
         int[] security = new int[processNum]; //记录安全序列
         //找到满足要求的进程
+        System.out.println("安全性检查：");
         System.out.println("Work      " + "Need     " + "Allocation     " +  "Work + Allocation");
         int cnt = 0; //加入安全序列的进程数
         int circle = 0; //循环圈数
         while (cnt < processNum) { //利用 max.length代表进程的个数
             for (int i = 0; i < processNum; i++) { //找到一个
-                if (finish[i] == false && meetDemand(need[i], work) ) {
+                if (!finish[i] && meetDemand(need[i], work) ) {
                     //先打印该进程的安全序列
                     printSecuritySeq(work, need[i], alloction[i]);
                     //找到进程则可更新work，finish
@@ -62,6 +75,7 @@ public class Banker {
             }
             if (cnt < circle) {
                 System.out.println("当前不存在安全序列");
+                break;
             }
         }
     }
@@ -76,7 +90,7 @@ public class Banker {
         for (int i = 0; i < resourceNum; i++) {
             request[num][i] = sc.nextInt();
         }
-        //银行家算法检查
+        //算法检查
         if (meetDemand2(request[num], need[num], available)) {
             //可以为该进程分配资源了
             for (int j = 0; j < resourceNum; j++) {
@@ -85,8 +99,10 @@ public class Banker {
                 need[num][j] -= request[num][j];
             }
             printAllocateRes(max,alloction,need,available);
+            SecurityAlgorithm();
+        } else {
+            System.out.println("资源分配不足");
         }
-        SecurityAlgorithm();
     }
 
     //判断request <= need; request <= available
@@ -111,6 +127,7 @@ public class Banker {
 
     //打印资源分配表
     public void printAllocateRes(int[][] max, int[][] alloction, int[][] need, int[] available) {
+        System.out.println("资源分配表：");
         System.out.println("Max      " + "Allocation     " + "Need      " );
         //row行 col列
         for (int row = 0; row < processNum; row++) {
