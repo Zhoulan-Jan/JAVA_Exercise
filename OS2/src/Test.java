@@ -10,15 +10,16 @@ public class Test {
         banker.setProcessNum(sc.nextInt());
         System.out.print("请输入资源数量： ");
         banker.setResourceNum(sc.nextInt());
+        System.out.println(banker.resourceNum);
         //输入max allocation available
         for (int row = 0; row < banker.processNum; row++) {
-            System.out.println("请输入进程" + row + "的max");
+            System.out.println("请输入进程P" + row + "的max");
             for (int col = 0; col < banker.resourceNum; col++) {
                 banker.max[row][col] = sc.nextInt();
             }
         }
         for (int row = 0; row < banker.processNum; row++) {
-            System.out.println("请输入进程" + row + "的allocation");
+            System.out.println("请输入进程P" + row + "的allocation");
             for (int col = 0; col < banker.resourceNum; col++) {
                 banker.alloction[row][col] = sc.nextInt();
             }
@@ -37,7 +38,6 @@ public class Test {
         banker.SecurityAlgorithm();
 
         //进程请求资源
-
         System.out.print("> 是否请求资源：y/n  ");
         while (sc.hasNext()) {
             String intput = sc.next();
