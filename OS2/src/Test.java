@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Test {
@@ -10,7 +9,7 @@ public class Test {
         banker.setProcessNum(sc.nextInt());
         System.out.print("请输入资源数量： ");
         banker.setResourceNum(sc.nextInt());
-        System.out.println(banker.resourceNum);
+        //System.out.println(banker.resourceNum);
         //输入max allocation available
         for (int row = 0; row < banker.processNum; row++) {
             System.out.println("请输入进程P" + row + "的max");

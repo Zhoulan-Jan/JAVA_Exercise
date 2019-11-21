@@ -16,7 +16,7 @@ public class Banker {
 //    int[][] alloction = {{0,1,0},{2,0,0},{3,0,2},{2,1,1},{0,0,2}}; //分配矩阵
 //    int[][] need = new int[5][3]; //需求矩阵 need = max - alloction
 
-    int[][] max = new int[20][20]; //new int[processNum][resourceNum] 错误申请到的矩阵为 0*0
+    int[][] max = new int[20][20]; //new int[processNum][resourceNum] 错误 申请到的矩阵为 0*0
     int[][] alloction = new int[20][20];
     int[][] need = new int[20][20];
     int[] available = new int[20];
@@ -179,5 +179,4 @@ public class Banker {
         }
         System.out.println();
     }
-
 }
