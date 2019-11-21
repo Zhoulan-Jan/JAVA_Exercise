@@ -10,6 +10,5 @@ public class Test {
             scheduling.print(head);
         }
 //        scheduling.run(head);  scheduling.print(head);
-
     }
 }

@@ -5,18 +5,20 @@ public class Scheduling {
     public void initNode(PCB head) {
         //List<PCB> list = new LinkedList<>(); //使用内置的list 不知道next如何表达
         //建立带头结点的链表
-//        Random ra = new Random();
-//////        PCB K1 = new PCB("P1",ra.nextInt(50),ra.nextInt(50),"R");
-//////        PCB K2 = new PCB("P2",ra.nextInt(50),ra.nextInt(50),"R");
-//////        PCB K3 = new PCB("P3",ra.nextInt(50),ra.nextInt(50),"R");
-//////        PCB K4 = new PCB("P4",ra.nextInt(50),ra.nextInt(50),"R");
-//////        PCB K5 = new PCB("P5",ra.nextInt(50),ra.nextInt(50),"R");
+        //使用随机数
         Random ra = new Random();
-        PCB K1 = new PCB("P1",2,1,"R");
-        PCB K2 = new PCB("P2",3,5,"R");
-        PCB K3 = new PCB("P3",1,3,"R");
-        PCB K4 = new PCB("P4",2,4,"R");
-        PCB K5 = new PCB("P5",4,2,"R");
+        PCB K1 = new PCB("P1",ra.nextInt(13),ra.nextInt(13),"R");
+        PCB K2 = new PCB("P2",ra.nextInt(13),ra.nextInt(13),"R");
+        PCB K3 = new PCB("P3",ra.nextInt(13),ra.nextInt(13),"R");
+        PCB K4 = new PCB("P4",ra.nextInt(13),ra.nextInt(13),"R");
+        PCB K5 = new PCB("P5",ra.nextInt(13),ra.nextInt(13),"R");
+
+        //使用固定数值
+//        PCB K1 = new PCB("P1",2,1,"R");
+//        PCB K2 = new PCB("P2",3,5,"R");
+//        PCB K3 = new PCB("P3",1,3,"R");
+//        PCB K4 = new PCB("P4",2,4,"R");
+//        PCB K5 = new PCB("P5",4,2,"R");
 
 //        //用指针指出队列连接情况
 //        head.next = K2;
@@ -102,7 +104,7 @@ public class Scheduling {
     //打印一次进程后的队列状况
     public void print(PCB head) {
         PCB cur = head.next;
-        System.out.print("被选中的进程：" + cur + ",");
+        System.out.print("被选中的进程：" + cur + ",  ");
         for (; cur != null; cur = cur.next) {
             System.out.print(cur + " ");
         }
