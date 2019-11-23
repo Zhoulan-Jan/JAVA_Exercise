@@ -20,10 +20,11 @@ public class Test {
 
 //        Status tmp = ed.move(parent, 3, zeroPosition); //正确
 //        ed.printProcess(tmp.nums);
-        ed.getChild(parent, child);
+        child = ed.getChild(parent);
         for (int i = 0; i < child.size(); i++) {
-            ed.printProcess(child.get(i).nums);
+            ed.printProcess(child.get(i).nums); //牵一发而动全身了2 8 3 1 0 4 0 5 0
         }
+
 
 
 

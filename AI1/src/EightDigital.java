@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EightDigital{
 //    int[] initial = {2, 8, 3, 1, 6, 4, 7, 0, 5}; //初始状态
@@ -40,22 +41,34 @@ public class EightDigital{
 
 
     //根据一个父状态，得到子态
-    public void getChild(Status parent, ArrayList<Status> child) {
+    public ArrayList<Status> getChild(Status parent) {
+        ArrayList<Status> child = new ArrayList<>();
+        int[] tmp = parent.nums;
         //找到父状态 0 的位置
         int position = getZero(parent.nums);
         //在允许移动的情况下，根据 0 的位置移动
-        if (isMoveUp(position)) { //注意移动之后，parent.nums已经修改了
-            child.add(move(parent, 0, position));
+        if (isMoveUp(position)) { //注意移动之后，parent.nums已经修改了 //怎么改回来啊啊啊 //能够成功修改了 但是存到child表里又发生变化，只有最后一个
+            child.add(move(parent, 0, position)); // parent.nums是正确的结果了
+            System.out.println(Arrays.toString(child.get(0).nums));
         }
+        parent.nums = tmp;
         if (isMoveDown(position)) {
             child.add(move(parent, 1, position));
         }
+        parent.nums = tmp;
         if (isMoveLeft(position)) {
             child.add(move(parent, 2, position));
+            System.out.println(Arrays.toString(child.get(1).nums));
         }
+        parent.nums = tmp;
         if (isMoveRight(position)) {
             child.add(move(parent, 3, position));
+            System.out.println(Arrays.toString(child.get(2).nums));
         }
+        System.out.println(Arrays.toString(child.get(0).nums));
+        System.out.println(Arrays.toString(child.get(1).nums));
+        System.out.println(Arrays.toString(child.get(2).nums));
+        return child;
     }
 
     //移动 true
