@@ -7,11 +7,11 @@ public class Scheduling {
         //建立带头结点的链表
         //使用随机数
         Random ra = new Random();
-        PCB K1 = new PCB("P1",ra.nextInt(13),ra.nextInt(13),"R");
-        PCB K2 = new PCB("P2",ra.nextInt(13),ra.nextInt(13),"R");
-        PCB K3 = new PCB("P3",ra.nextInt(13),ra.nextInt(13),"R");
-        PCB K4 = new PCB("P4",ra.nextInt(13),ra.nextInt(13),"R");
-        PCB K5 = new PCB("P5",ra.nextInt(13),ra.nextInt(13),"R");
+        PCB K1 = new PCB("P1",ra.nextInt(50),ra.nextInt(50),"R");
+        PCB K2 = new PCB("P2",ra.nextInt(50),ra.nextInt(50),"R");
+        PCB K3 = new PCB("P3",ra.nextInt(50),ra.nextInt(50),"R");
+        PCB K4 = new PCB("P4",ra.nextInt(50),ra.nextInt(50),"R");
+        PCB K5 = new PCB("P5",ra.nextInt(50),ra.nextInt(50),"R");
 
         //使用固定数值
 //        PCB K1 = new PCB("P1",2,1,"R");
@@ -37,7 +37,7 @@ public class Scheduling {
         //return list;
     }
 
-    //队列首次排列，在插入进程的同时排序
+    //队列首次排列，在插入进程的同时排序 正确
     public void build(PCB head, PCB pnode) {
         //空链表
         if (head.next == null) {
