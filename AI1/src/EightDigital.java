@@ -12,6 +12,11 @@ public class EightDigital{
     ArrayList<Status> closed = new ArrayList<>();
     //判断是否为目标状态
 
+    //初始化根节点
+    public void init(Status root) {
+
+    }
+
     //操作 传入open closed parent destination
     //描述不恰当 从父状态得到下一个状态 父状态
     public void operation(ArrayList<Status> open, ArrayList<Status> closed) {
@@ -40,41 +45,33 @@ public class EightDigital{
 //    }
 
 
-    //根据一个父状态，得到子态
-    public ArrayList<Status> getChild(Status parent) {
-        ArrayList<Status> child = new ArrayList<>();
+    //根据一个父状态，得到子态 true
+    public void getChild(Status parent, ArrayList<Status> child) {
+        //ArrayList<Status> child = new ArrayList<>();
         int[] tmp = parent.nums;
         //找到父状态 0 的位置
         int position = getZero(parent.nums);
         //在允许移动的情况下，根据 0 的位置移动
         if (isMoveUp(position)) { //注意移动之后，parent.nums已经修改了 //怎么改回来啊啊啊 //能够成功修改了 但是存到child表里又发生变化，只有最后一个
             child.add(move(parent, 0, position)); // parent.nums是正确的结果了
-            System.out.println(Arrays.toString(child.get(0).nums));
         }
-        parent.nums = tmp;
+        //parent.nums = tmp;
         if (isMoveDown(position)) {
             child.add(move(parent, 1, position));
         }
-        parent.nums = tmp;
         if (isMoveLeft(position)) {
             child.add(move(parent, 2, position));
-            System.out.println(Arrays.toString(child.get(1).nums));
         }
-        parent.nums = tmp;
         if (isMoveRight(position)) {
             child.add(move(parent, 3, position));
-            System.out.println(Arrays.toString(child.get(2).nums));
         }
-        System.out.println(Arrays.toString(child.get(0).nums));
-        System.out.println(Arrays.toString(child.get(1).nums));
-        System.out.println(Arrays.toString(child.get(2).nums));
-        return child;
+        //return child;
     }
 
     //移动 true
     public Status move(Status parent, int x, int zeroPosition) {
-        Status res;
-        res = parent;
+        Status res = new Status(parent); //这才是深拷贝
+        //res = parent;  //这是浅拷贝 造成了牵一发而动全身
         //int[] resNums = parent.nums;
         int[] resNums = new int[9];
         for (int i = 0; i < parent.nums.length; i++) {
