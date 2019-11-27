@@ -99,20 +99,25 @@ public class LoginFrame extends JFrame implements ActionListener,MouseListener{
         passTxt.setSize(150, 30);
         passTxt.setLocation(160, 100);
         this.add(passTxt);//将密码框放到窗体上
+
         loBt=new JButton("登录");//创建按钮
         loBt.setSize(60, 30);
         loBt.setLocation(120, 150);
         loBt.addActionListener(this);
         this.add(loBt);//将按钮放到窗体上
+        loBt.addActionListener(this);
+        loBt.addMouseListener(this);
+
         quitBt=new JButton("退出");//创建按钮
         quitBt.setSize(60, 30);
         quitBt.setLocation(210, 150);
-        this.add(quitBt);//将按钮放到窗体上*/
-
+        this.add(quitBt);//将按钮放到窗体上
+        quitBt.addActionListener(this);
 
         this.setVisible(true);//设置窗体可见
     }
 
+    //用户登录 不会用
     public void actionPerformed(ActionEvent e)
     {
         JButton bt=(JButton)e.getSource();
@@ -128,7 +133,7 @@ public class LoginFrame extends JFrame implements ActionListener,MouseListener{
             {
 			/*this.setVisible(false);
 			//将当前登录窗口隐藏
-			MainFrame main=new MainFrame();
+		    MainFrame main=new MainFrame();
 			//创建主窗口，并显示*/
                 this.setSize(800, 600);
                 //修改窗体的大小
@@ -152,6 +157,7 @@ public class LoginFrame extends JFrame implements ActionListener,MouseListener{
 
     }
 
+    //初始化界面
     private void initSelectPanel()
     {
         selectPa=new JPanel();
@@ -172,6 +178,7 @@ public class LoginFrame extends JFrame implements ActionListener,MouseListener{
 
     }
 
+    //面板扩大
     private void initControlPa()
     {
         controlPa=new JPanel();
@@ -214,30 +221,124 @@ public class LoginFrame extends JFrame implements ActionListener,MouseListener{
             findBt.addActionListener(this);
             controlPa.add(findBt);
             this.getContentPane().repaint();
+
+            StudentDeal deal = new StudentDeal();
+            //String name = userTxt.getText().trim(); //获取用户名
+            String num = numLa.getText().trim(); //获取学号
+            System.out.println(num);
+            String x = deal.findNameByNum(num);
+            System.out.print(x);
+        }
+        if(str.equals("增加学生"))
+        {
+            controlPa.removeAll();
+            //清空操作面板的所有控件
+            numLa=new JLabel("请输入学号");
+            numLa.setSize(100, 30);
+            numLa.setLocation(30, 30);
+            controlPa.add(numLa);
+            nameLa=new JLabel("学生姓名");
+            nameLa.setSize(100, 30);
+            nameLa.setLocation(30, 80);
+            controlPa.add(nameLa);
+            numTxt=new JTextField();
+            numTxt.setSize(100, 30);
+            numTxt.setLocation(140, 30);
+            controlPa.add(numTxt);
+            nameTxt=new JTextField();
+            nameTxt.setSize(100, 30);
+            nameTxt.setLocation(140, 80);
+            controlPa.add(nameTxt);
+            findBt=new JButton("增加");
+            findBt.setSize(60, 30);
+            findBt.setLocation(120, 130);
+            findBt.addActionListener(this);
+            controlPa.add(findBt);
+            this.getContentPane().repaint();
+        }
+        if(str.equals("删除学生"))
+        {
+            controlPa.removeAll();
+            //清空操作面板的所有控件
+            numLa=new JLabel("请输入学号");
+            numLa.setSize(100, 30);
+            numLa.setLocation(30, 30);
+            controlPa.add(numLa);
+            nameLa=new JLabel("学生姓名");
+            nameLa.setSize(100, 30);
+            nameLa.setLocation(30, 80);
+            controlPa.add(nameLa);
+            numTxt=new JTextField();
+            numTxt.setSize(100, 30);
+            numTxt.setLocation(140, 30);
+            controlPa.add(numTxt);
+            nameTxt=new JTextField();
+            nameTxt.setSize(100, 30);
+            nameTxt.setLocation(140, 80);
+            controlPa.add(nameTxt);
+            findBt=new JButton("删除");
+            findBt.setSize(60, 30);
+            findBt.setLocation(120, 130);
+            findBt.addActionListener(this);
+            controlPa.add(findBt);
+            this.getContentPane().repaint();
+        }
+        if(str.equals("修改学生"))
+        {
+            controlPa.removeAll();
+            //清空操作面板的所有控件
+            numLa=new JLabel("请输入学号");
+            numLa.setSize(100, 30);
+            numLa.setLocation(30, 30);
+            controlPa.add(numLa);
+            nameLa=new JLabel("学生姓名");
+            nameLa.setSize(100, 30);
+            nameLa.setLocation(30, 80);
+            controlPa.add(nameLa);
+            numTxt=new JTextField();
+            numTxt.setSize(100, 30);
+            numTxt.setLocation(140, 30);
+            controlPa.add(numTxt);
+            nameTxt=new JTextField();
+            nameTxt.setSize(100, 30);
+            nameTxt.setLocation(140, 80);
+            controlPa.add(nameTxt);
+            findBt=new JButton("修改");
+            findBt.setSize(60, 30);
+            findBt.setLocation(120, 130);
+            findBt.addActionListener(this);
+            controlPa.add(findBt);
+            this.getContentPane().repaint();
         }
     }
     public void mousePressed(MouseEvent e) {
-        JButton sourceBt=(JButton)e.getSource();
-        //获取事件源，并强制转换为按钮对象
-        String colorTxt=sourceBt.getText();
-        //获取按钮上的文本
-        if(colorTxt.equals("登录"))
-        {
-            this.getContentPane().setBackground(Color.RED);
-        }
-        else
-        {
-            if(colorTxt.equals("退出"))
-            {
-                this.getContentPane().setBackground(Color.blue);
+        JButton bt=(JButton)e.getSource();
+        if(bt.getText().equals("登录")) {
+            String name = userTxt.getText().trim();
+            //获取用户名
+            String num = passTxt.getText().trim();
+            //获取学号
+            StudentDeal deal = new StudentDeal();
+            //创建学生文件处理对象
+            if (name.equals("李四") && num.equals("011")) { //num.equals(deal.findNumByName(name)) name.equals("李四") && num.equals("011")
+			/*this.setVisible(false);
+			//将当前登录窗口隐藏
+		    MainFrame main=new MainFrame();*/
+			//创建主窗口，并显示
+                this.setSize(800, 600);
+                //修改窗体的大小
+                this.setTitle("主窗口");
+                this.getContentPane().removeAll();
+                //将窗口上的所有控件移除
+                initSelectPanel();//初始化选择面板
+                initControlPa();//初始化操作面板
+            }
+            else {
+                System.out.println("登录失败");
             }
         }
     }
-    public void mouseReleased(MouseEvent e){}
-    public void mouseEntered(MouseEvent e)
-    {
-    }
-    public void mouseExited(MouseEvent e)
-    {
-    }
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 }
