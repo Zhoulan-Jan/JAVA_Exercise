@@ -1,4 +1,6 @@
 
+import fourteen.SA;
+import fourteen.SB;
 import one.Student;
 import twelve.Employee;
 import twelve.Faculty;
@@ -9,6 +11,7 @@ public class Test {
     public static void main(String arg[]) {
         testOne();
         testTwelve();
+        testfourteen();
     }
 
     //测试第一题
@@ -37,5 +40,13 @@ public class Test {
         Staff staff = new Staff("Harry","Hagrid","236544","458331@hg",
                 "hg","$26","1888.2.6","1233.11.2","教授","教师");
         System.out.println(staff);
+    }
+
+    //测试第十四题
+    public static void testfourteen() {
+        SA sa = new SA();
+        SB sb = new SB();
+        System.out.println("最大值: " + sa.f(18,24));
+        System.out.println("最小公倍数: " + sb.f(18,24));
     }
 }

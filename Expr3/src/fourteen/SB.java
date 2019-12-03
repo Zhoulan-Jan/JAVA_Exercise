@@ -6,9 +6,15 @@ public class SB extends SA {
     @Override
     public int f(int a, int b) {
         //先得到最大公约数
-        int x = a;
-
+        int bestDivisor  = b;
+        int tmp = b; //相除的时候 b 会发生变化
+        while (a % b != 0) {
+            bestDivisor = a % b;
+            a = b;
+            b = bestDivisor;
+        }
+        System.out.println("最大公约数：" + bestDivisor);
         //返回（a*b）/m
-        return super.f(a, b);
+        return (a * tmp) / bestDivisor;
     }
 }
