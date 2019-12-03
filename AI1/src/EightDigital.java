@@ -12,10 +12,6 @@ public class EightDigital{
     ArrayList<Status> closed = new ArrayList<>();
     //判断是否为目标状态
 
-    //初始化根节点
-    public void init(Status root) {
-
-    }
 
     //操作 传入open closed parent destination
     //描述不恰当 从父状态得到下一个状态 父状态
@@ -70,7 +66,7 @@ public class EightDigital{
 
     //移动 true
     public Status move(Status parent, int x, int zeroPosition) {
-        Status res = new Status(parent); //这才是深拷贝
+        Status res = new Status(); //这才是深拷贝
         //res = parent;  //这是浅拷贝 造成了牵一发而动全身
         //int[] resNums = parent.nums;
         int[] resNums = new int[9];
@@ -99,6 +95,7 @@ public class EightDigital{
         //交换 0 与 元素
         res.nums[zeroPosition] = parent.nums[p];
         res.nums[p] = 0;
+        res.initChild(parent, res.nums);
         return res;
     }
 
@@ -165,7 +162,7 @@ public class EightDigital{
                 System.out.println();
             }
         }
-        System.out.println();
+        //System.out.println();
     }
 
 
