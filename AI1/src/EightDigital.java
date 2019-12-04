@@ -41,7 +41,7 @@ public class EightDigital{
             open.remove(0);
             //如果 parent 为目的状态
             if (isTarget(parent)) {
-                System.out.println("成功了！");
+                //System.out.println("成功了！");
                 printRoute(parent);
                 break;
             }
@@ -226,6 +226,7 @@ public class EightDigital{
             step++;
         }
         for (int i = result.size() - 1; i >= 0; i--) {
+            System.out.println("估价函数为： " + result.get(i).valuation);
             printProcess(result.get(i).nums);
         }
         System.out.println("------结束移动------");

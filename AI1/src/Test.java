@@ -3,9 +3,9 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        int[] initial = {2, 8, 3, 1, 6, 4, 7, 0, 5}; //初始状态
-        //int[] initial = {2, 8, 3, 1, 0, 4, 7, 6, 5};
-        int[] destination = {1, 2, 3, 8, 0, 4, 7, 6, 5}; //目的状态
+        //int[] initial = {2, 8, 3, 1, 6, 4, 7, 0, 5}; //初始状态
+        int[] initial = {1,3,0,7,2,4,6,8,5};
+        //int[] destination = {1, 2, 3, 8, 0, 4, 7, 6, 5}; //目的状态
         EightDigital ed = new EightDigital();
         Status parent = new Status();  //正确了//但是里面的内容没有初始化成功
         parent.initRoot(initial);
