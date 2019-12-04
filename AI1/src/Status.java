@@ -1,7 +1,7 @@
 public class Status implements Comparable{
     char name;
     int[] nums = new int[9]; //使用一维数组更方便 （移动）
-    Status parent;
+    Status parent;  //当前状态的父状态
 
     int[] destination = {1, 2, 3, 8, 0, 4, 7, 6, 5};
 
