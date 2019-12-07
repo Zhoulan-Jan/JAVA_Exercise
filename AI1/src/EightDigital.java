@@ -81,7 +81,7 @@ public class EightDigital{
             //根据估价函数值，重新排列 open 表
             sortOpen(open);
             //Collections.sort(open);
-        }
+        } //end while
     }
 
     //得到一个状态，检验是否为目的状态

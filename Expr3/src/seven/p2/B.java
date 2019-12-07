@@ -1,4 +1,4 @@
-package seven.p1.p2;
+package seven.p2;
 
 import seven.p1.A;
 
