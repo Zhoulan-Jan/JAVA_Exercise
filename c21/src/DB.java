@@ -10,7 +10,7 @@ public class DB {
     //采用DataSource的方式完成
 
     //静态代码块
-    private static final String URL = "jdbc:mysql://localhost:3306/java12";
+    private static final String URL = "jdbc:mysql://localhost:3306/java12?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
