@@ -2,9 +2,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Modify {
+public class Update {
     //根据家具名称修改 价格 日期 风格
-    public static void modify(String namex, String pricex, String timex, String stylex) {
+    public static void update(String namex, int pricex, int numx, String datesx, String stylex) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -12,14 +12,15 @@ public class Modify {
             try{
                 //创建数据库连接
                 connection = DB.getConnection();
-                String sql = "update furnitures set price = ?, productDate = ?, style = ? where name = ?;";
+                String sql = "update furnitures set price = ?,num = ? ,dates = ?, style = ? where name = ?";
                 //操作命令对象执行sql语句，返回结果集resultSet  resultSet类似List<map<String,Object>> String 指表头
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setString(1,pricex);
-                preparedStatement.setString(2,timex);
-                preparedStatement.setString(3,stylex);
-                preparedStatement.setString(4,namex);
+                preparedStatement.setInt(1,pricex);
+                preparedStatement.setInt(2,numx);
+                preparedStatement.setString(3,datesx);
+                preparedStatement.setString(4,stylex);
+                preparedStatement.setString(5,namex);
 
                 int rows = preparedStatement.executeUpdate();
                 if (rows > 0) {
