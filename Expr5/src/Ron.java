@@ -27,6 +27,7 @@ public class Ron extends Frame implements ActionListener {
         JButton D = new JButton("D");
         JButton E = new JButton("E");
         JButton F = new JButton("F");
+
         panel1.add(A, BorderLayout.LINE_START);
         panel1.add(B,BorderLayout.CENTER);
         panel1.add(C,BorderLayout.LINE_END);

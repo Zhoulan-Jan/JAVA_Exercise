@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class Information extends Frame implements ActionListener {
+public class Information extends Frame implements ActionListener, WindowListener {
 
     public JLabel nameL= new JLabel("姓名：");
     public JLabel sexL= new JLabel("性别：");
@@ -58,10 +60,12 @@ public class Information extends Frame implements ActionListener {
         tx.setSize(410,170);
         tx.setLocation(70,550);
 
-        //this.add(tx);
         this.add(show);
-        show.add(tx);
+        show.setViewportView(tx);
         okB.addActionListener(this);
+        clearB.addActionListener(this);
+        //this.setDropTarget(JFrame.EXIT_ON_CLOSE);
+        addWindowListener(this);
         setVisible(true);
     }
 
@@ -76,6 +80,46 @@ public class Information extends Frame implements ActionListener {
             tx.append("姓名：" + name + "\n");
             tx.append("性别：" + sex + "\n");
             tx.append("年龄：" + age + "\n");
+        } else if (e.getActionCommand().equals("CLEAR")) {
+            naT.setText(null);
+            seT.setText(null);
+            agT.setText(null);
+            //naT.remove(this); //不可行
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

@@ -1,4 +1,3 @@
-import java.util.Collections;
 
 public class Test {
     public static void main(String[] args) {
@@ -9,6 +8,7 @@ public class Test {
         //Flow flow = new Flow();
         //Color color = new Color();
         //Log log = new Log();
-        Information information = new Information();
+        //Information information = new Information();
+        Calculator calculator = new Calculator();
     }
 }
