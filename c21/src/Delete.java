@@ -19,6 +19,8 @@ public class Delete {
                 int rows = preparedStatement.executeUpdate();
                 if (rows > 0) {
                     System.out.println("delete success");
+                } else {
+                    System.out.println("未找到该物品");
                 }
             } finally {
                 //释放资源 反向释放
