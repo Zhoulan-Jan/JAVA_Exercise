@@ -9,6 +9,7 @@ public class Test {
         //Color color = new Color();
         //Log log = new Log();
         //Information information = new Information();
-        Calculator calculator = new Calculator();
+        //Calculator calculator = new Calculator();
+        Furniture furniture = new Furniture();
     }
 }
