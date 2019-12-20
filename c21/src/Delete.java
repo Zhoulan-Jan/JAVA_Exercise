@@ -13,7 +13,6 @@ public class Delete {
                 //创建数据库连接
                 connection = DB.getConnection();
                 String sql = "delete from furnitures where name = ?;";
-                //操作命令对象执行sql语句，返回结果集resultSet  resultSet类似List<map<String,Object>> String 指表头
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1,name);
                 int rows = preparedStatement.executeUpdate();
@@ -22,6 +21,8 @@ public class Delete {
                 } else {
                     System.out.println("未找到该物品");
                 }
+                //查询得到数据库所有信息
+
             } finally {
                 //释放资源 反向释放
                 DB.close(connection,preparedStatement,resultSet);
