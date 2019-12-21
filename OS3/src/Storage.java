@@ -38,12 +38,57 @@ public class Storage {
 
     //回收
     public void recycling(String name) {
-        for (int i = 0; i < mainSpace.size(); i++) {
-            Node node = mainSpace.get(i);
+//        for (int i = 0; i < mainSpace.size(); i++) {
+//            Node node = mainSpace.get(i);
+//
+//            if (node.name != null && node.name.equals(name)) {
+//                node.isAllocated = false;
+//                node.name = null;
+//            }
+//        }
 
-            if (node.name != null && node.name.equals(name)) {
-                node.isAllocated = false;
-                node.name = null;
+        Collections.sort(mainSpace);
+        for (int i = 0; i < mainSpace.size(); i++) {
+            Node curNode = mainSpace.get(i);
+            Node preNode = null;
+            Node nextNode = null;
+            if (i != 0) {
+               preNode = mainSpace.get(i-1);
+            }
+            if (i < mainSpace.size() - 1) {
+                nextNode = mainSpace.get(i+1);
+            }
+
+            //先找到要回收的分区
+            if (curNode.name != null && curNode.name.equals(name)) {
+                //是否能与前一个空闲分区合并 (即前一个是否为空闲分区，是合并）
+                if (i != 0 && preNode != null && !preNode.isAllocated) { //为空闲分区
+                    //是否能与后一个空闲分区合并
+                    if (nextNode != null && !nextNode.isAllocated) {
+                        //三个分区合并
+                        preNode.len = preNode.len + curNode.len + nextNode.len;
+                        preNode.end = preNode.end + curNode.len + nextNode.len;
+                        mainSpace.remove(curNode);
+                        mainSpace.remove(nextNode);
+                    } else {
+                        //与前一个合并
+                        preNode.end += curNode.len;
+                        preNode.len += curNode.len;
+                        mainSpace.remove(curNode);
+                    }
+                } else {
+                    if (nextNode != null && !nextNode.isAllocated) {
+                        //与后一个分区合并
+                        curNode.end += nextNode.len;
+                        curNode.len += nextNode.len;
+                        curNode.isAllocated = false;
+                        mainSpace.remove(nextNode);
+                    } else {
+                        //不合并
+                        curNode.isAllocated = false;
+                        curNode.name = null;
+                    }
+                }
             }
         }
     }
