@@ -10,7 +10,7 @@ public class MainFrame extends Frame implements ActionListener {
     public JButton find = new JButton("查询");
     public JButton add = new JButton("增加");
     public JButton delete = new JButton("删除");
-    public JButton uppdate = new JButton("更新");
+    public JButton update = new JButton("更新");
     public JTable table;
     public JScrollPane panel;
     //控件放置
@@ -34,10 +34,10 @@ public class MainFrame extends Frame implements ActionListener {
         delete.addActionListener(this);
         this.add(delete);
 
-        uppdate.setSize(80,50);
-        uppdate.setLocation(360,60);
-        uppdate.addActionListener(this);
-        this.add(uppdate);
+        update.setSize(80,50);
+        update.setLocation(360,60);
+        update.addActionListener(this);
+        this.add(update);
 
         //initTable();
         addWindowListener(new WindowAdapter() {
@@ -46,6 +46,7 @@ public class MainFrame extends Frame implements ActionListener {
                 System.exit(0);
             }
         });
+        TableShow();
         setVisible(true);
     }
 
@@ -60,7 +61,16 @@ public class MainFrame extends Frame implements ActionListener {
         this.add(panel);
     }
 
-    //
+    public void TableShow2(ArrayList<Furniture> furs) {
+        String[][] value = Show.show2(furs);
+        String[] columnName = {"编号","名称","价格","数量","日期","风格"};
+        table = new JTable(value, columnName);
+        panel = new JScrollPane(table);
+        panel.setSize(600,600);
+        panel.setLocation(60,120);
+        this.add(panel);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("增加")) {
@@ -76,12 +86,17 @@ public class MainFrame extends Frame implements ActionListener {
             Delete.delete("茶几");
             TableShow();
         } else if (e.getActionCommand().equals("查询")) {
-            Find.findByName("床");
-            Find.findByName("茶几");
-            Find.findById(102);
-            Find.findByNum(200);
-            Find.findByPrice(5500);
-            Find.findByStyle("北欧风格");
+//            Find.findByName("床");
+//            Find.findByName("茶几");
+//            Find.findById(102);
+//            Find.findByNum(200);
+//            Find.findByPrice(5500);
+//            //精确查询
+            ArrayList<Furniture> f1 = Find.findByName("床");
+            TableShow2(f1);
+            //模糊查询
+            ArrayList<Furniture> f = Find.findByStyle("古典");
+            TableShow2(f);
         } else if (e.getActionCommand().equals("更新")) {
             Update.update("床",100,50,"2019-03-03","ss风格");
             TableShow();
