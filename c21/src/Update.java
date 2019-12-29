@@ -12,7 +12,7 @@ public class Update {
             try{
                 //创建数据库连接
                 connection = DB.getConnection();
-                String sql = "update furnitures set price = ?,num = ? ,dates = ?, style = ? where name = ?";
+                String sql = "update furnitures set price = ?,num = ? ,dates = ?, style = ? where name = ?;";
                 //操作命令对象执行sql语句，返回结果集resultSet  resultSet类似List<map<String,Object>> String 指表头
                 preparedStatement = connection.prepareStatement(sql);
 
