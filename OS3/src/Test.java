@@ -15,6 +15,12 @@ public class Test {
         storage.recycling("作业4");
         storage.Print();
 
+//        storage.distribution("作业1",15);
+//        storage.distribution("作业2",30);
+//        storage.recycling("作业1");
+//        storage.distribution("作业3",8);
+//        storage.distribution("作业4",6);
+//        storage.Print();
 //        storage.distribution("A",200);
 //        storage.distribution("B",150);
 //        storage.recycling("A");
