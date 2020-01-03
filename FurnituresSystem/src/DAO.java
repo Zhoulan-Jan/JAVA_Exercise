@@ -31,20 +31,20 @@ public class DAO {
     //根据家具的名称来得到家具的全部信息
     public Furniture findStuBySno(String sno)
     {
-        Furniture stu=null;
+        Furniture fur=null;
         try{
             PreparedStatement ps=con.prepareStatement("select id, name, price, num, dates,style from Furnitures where name = ?");
             ps.setString(1, sno);
             ResultSet rs=ps.executeQuery();
             if(rs.next())
             {
-                int id=rs.getInt(1);
+                int id = rs.getInt(1);
                 String name=rs.getString(2);
                 int price=rs.getInt(3);
                 int num=rs.getInt(4);
                 String  dates=rs.getString(5);
                 String  style=rs.getString(6);
-                stu=new Furniture(id,name,price,num,dates,style);
+                fur=new Furniture(id,name,price,num,dates,style);
             }
             ps.close();
             //关闭SQL语句执行对象
@@ -55,14 +55,14 @@ public class DAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return stu;
+        return fur;
     }
     
     //模糊查找
     //根据传入的风格
     public ArrayList<Furniture> findStuByStyle(String sstyle)
     {
-        ArrayList<Furniture> result=new ArrayList<Furniture>();
+        ArrayList<Furniture> result=new ArrayList<>();
         try{
             Statement st=con.createStatement();
             String strSQL="select * from Furnitures where style like '%"+sstyle+"%';";
@@ -75,8 +75,8 @@ public class DAO {
                 int num=rs.getInt(4);
                 String  dates=rs.getString(5);
                 String  style=rs.getString(6);
-                Furniture stu=new Furniture(id ,name,  price, num,  dates, style);
-                result.add(stu);
+                Furniture fur=new Furniture(id ,name,  price, num,  dates, style);
+                result.add(fur);
             }
             st.close();
             //关闭SQL语句执行对象
@@ -87,20 +87,19 @@ public class DAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return result;
     }
 
-    public void add(Furniture stu)
+    public void add(Furniture fur)
     {
         try{
             PreparedStatement ps=con.prepareStatement("insert into Furnitures( name, price, num,dates, style) values (?,?,?,?,?);");
             //创建SQL语句执行对象
-            ps.setString(1, stu.getName());
-            ps.setInt(2,(stu.getPrice()));
-            ps.setInt(3,(stu.getNum()));
-            ps.setString(4, (stu.getDates()));
-            ps.setString(5,stu.getStyle());
+            ps.setString(1, fur.getName());
+            ps.setInt(2,(fur.getPrice()));
+            ps.setInt(3,(fur.getNum()));
+            ps.setString(4, fur.getDates());
+            ps.setString(5,fur.getStyle());
 
             ps.execute();
             ps.close();
@@ -133,16 +132,15 @@ public class DAO {
         }
     }
 
-    public void update(Furniture stu)
+    public void update(Furniture fur)
     {
-
         try{
             PreparedStatement ps=con.prepareStatement("update furnitures set price = ?,num =?, style =? where name = ?");
             //创建SQL语句执行对象
-            ps.setInt(1,stu.getPrice());
-            ps.setInt(2, stu.getNum());
-            ps.setString(3,stu.getStyle());
-            ps.setString(4, stu.getName());
+            ps.setInt(1,fur.getPrice());
+            ps.setInt(2, fur.getNum());
+            ps.setString(3,fur.getStyle());
+            ps.setString(4, fur.getName());
             ps.execute();
             ps.close();
             //关闭SQL语句执行对象

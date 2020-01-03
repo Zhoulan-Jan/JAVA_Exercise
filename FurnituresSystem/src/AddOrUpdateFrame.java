@@ -10,7 +10,7 @@ public class AddOrUpdateFrame extends JFrame implements ActionListener{
     JButton bt;
     MainFrame main;//定义主窗口
 
-    public AddOrUpdateFrame(String type,Furniture stu,MainFrame main)
+    public AddOrUpdateFrame(String type,Furniture fur,MainFrame main)
     {
         this.setSize(300,400);
         this.setLayout(null);
@@ -71,14 +71,14 @@ public class AddOrUpdateFrame extends JFrame implements ActionListener{
             bt=new JButton("修改");
             bt.setSize(60, 30);
             bt.setLocation(90,280);
-            if(stu!=null)
+            if(fur!=null)
             {
-                numTxt.setText(stu.getName());
+                numTxt.setText(fur.getName());
                 numTxt.setEditable(false);
-                nameTxt.setText(String.valueOf(stu.getPrice()));
-                numText.setText(String.valueOf(stu.getNum()));
-                ageTxt.setText(stu.getDates());
-                deptCom.setSelectedItem(stu.getStyle());
+                nameTxt.setText(String.valueOf(fur.getPrice()));
+                numText.setText(String.valueOf(fur.getNum()));
+                ageTxt.setText(fur.getDates());
+                deptCom.setSelectedItem(fur.getStyle());
             }
         }
         this.add(bt);
@@ -93,22 +93,21 @@ public class AddOrUpdateFrame extends JFrame implements ActionListener{
         //Furniture dao=new Furniture();
         DAO dao=new DAO();
         String name=numTxt.getText();
-        int price=Integer.valueOf(nameTxt.getText());
-        int num=Integer.valueOf(numText.getText());
+        int price=Integer.parseInt(nameTxt.getText());
+        int num=Integer.parseInt(numText.getText());
         String data=ageTxt.getText();
         String style =deptCom.getSelectedItem().toString();
-        Furniture stu=new Furniture(name,price,num,data,style);
+        Furniture fur=new Furniture(name,price,num,data,style);
         if(bt.getText().equals("修改"))
         {
-            dao.update(stu);
+            dao.update(fur);
         }
         else
         {
-            dao.add(stu);
+            dao.add(fur);
         }
         ArrayList list=dao.findStuByStyle("");
         main.initTable(list);
         this.dispose();
-
     }
 }

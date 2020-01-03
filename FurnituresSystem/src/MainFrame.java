@@ -121,18 +121,19 @@ public class MainFrame extends JFrame implements ActionListener
         });
     }
 
-    public void initTable(ArrayList<Furniture> stus)//初始化表格的方法
+    //初始化表格的方法
+    public void initTable(ArrayList<Furniture> furs)
     {
-        if((stus!=null)||(stus.size()!=0))
+        if((furs!=null)||(furs.size()!=0))
         {
             if(panel!=null)
             {
                 this.remove(panel);
             }
             String[] columnNames = { "编号", "名称", "价格", "数量", "日期" ,"风格"};
-            String[][] values = new String[stus.size()][6];
-            for (int i = 0; i < stus.size(); i++) {
-                Furniture stu = (Furniture) stus.get(i);
+            String[][] values = new String[furs.size()][6];
+            for (int i = 0; i < furs.size(); i++) {
+                Furniture stu = (Furniture) furs.get(i);
                 values[i][0] = String.valueOf(stu.getId());
                 values[i][1] = stu.getName();
                 values[i][2] = String.valueOf(stu.getPrice());
@@ -146,7 +147,6 @@ public class MainFrame extends JFrame implements ActionListener
             panel.setLocation(20, 150);
             this.add(panel);
         }
-
     }
 
     public void actionPerformed(ActionEvent e)
@@ -206,9 +206,9 @@ public class MainFrame extends JFrame implements ActionListener
                                     .toString());
                             String dates = table.getValueAt(row, 4).toString();
                             String style = table.getValueAt(row, 4).toString();
-                            Furniture stu = new Furniture(name,price ,num,dates,style);
+                            Furniture fur = new Furniture(name,price ,num,dates,style);
                             AddOrUpdateFrame newFrame = new AddOrUpdateFrame(
-                                    "修改", stu, this);
+                                    "修改", fur, this);
                         }
                     }
                     else
