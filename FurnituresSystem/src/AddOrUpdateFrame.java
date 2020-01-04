@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddOrUpdateFrame extends JFrame implements ActionListener{
 
@@ -95,15 +97,18 @@ public class AddOrUpdateFrame extends JFrame implements ActionListener{
         String name=numTxt.getText();
         int price=Integer.parseInt(nameTxt.getText());
         int num=Integer.parseInt(numText.getText());
+
         String data=ageTxt.getText();
         String style =deptCom.getSelectedItem().toString();
-        Furniture fur=new Furniture(name,price,num,data,style);
+
         if(bt.getText().equals("修改"))
         {
+            Furniture fur=new Furniture(name,price,num,data,style);
             dao.update(fur);
         }
         else
         {
+            Furniture fur=new Furniture(name,price,num,data,style);
             dao.add(fur);
         }
         ArrayList list=dao.findStuByStyle("");

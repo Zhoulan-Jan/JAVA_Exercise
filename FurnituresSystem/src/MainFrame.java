@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements ActionListener
         this.add(passLa);
         //设置文本域
         JTextField userText = new JTextField(30);
-        JTextField passText = new JTextField(30);
+        JTextField passText = new JPasswordField(30);
         userText.setLocation(130, 30);
         userText.setSize(150, 30);
         passText.setLocation(130, 80);
