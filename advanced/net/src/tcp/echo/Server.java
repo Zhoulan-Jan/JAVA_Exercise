@@ -9,7 +9,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8080);
         while (true) {
-            Socket clientSocket = serverSocket.accept(); //接收消息
+            Socket clientSocket = serverSocket.accept(); //获取一条已建立的连接
             //若接收到消息，则打印客户端的信息
             InetAddress clientAddr = clientSocket.getInetAddress();
             int clientPort = clientSocket.getPort();
@@ -27,8 +27,8 @@ public class Server {
             StringBuffer sb = new StringBuffer();
             while ((line = br.readLine()) != null) {
 //                sb.append(line);
-                System.out.println(line);
-                ps.println("我已收到消息");
+                System.out.println(line); //打印到服务器的显示屏
+                ps.println("我已收到消息"); //打印到客户端的显示屏
             }
 //            clientSocket.close();
         }
