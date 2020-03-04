@@ -1,6 +1,8 @@
 package http.simple;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,8 +11,13 @@ public class Request {
     //请求方法
     public String method;
 
+    //URL：/c%2B%2B?name=hello
+    //path = c++; parameter = {name = hello}
     //请求路径
     public String path;
+
+    //请求参数
+    Map<String, String> parameter = new HashMap<>();
 
     //请求版本
     public String version;
@@ -21,7 +28,7 @@ public class Request {
     //请求正文（忽略）
 
 
-    public static Request parse(InputStream is) {
+    public static Request parse(InputStream is) throws IOException {
         Request request = new Request();
         Scanner sc = new Scanner(is, "UTF-8");
         //解析请求行
@@ -38,10 +45,25 @@ public class Request {
         return request;
     }
 
-    public static void parseRequestLine(Request request, String s) {
+    //详细解析请求行
+    public static void parseRequestLine(Request request, String s) throws IOException {
         String[] group = s.split(" ");
         request.method = group[0];
-        request.path = group[1];
+        //从 group[1] 分离出路径和查询字符串
+        String[] group2 = group[1].split("\\?");
+        request.path = group2[0];
+        if (group2.length != 1) {
+            String[] group3 = group2[1].split("&");
+            for (String kvStr : group3) {
+                String[] group4 = kvStr.split("=");
+                String key = URLDecoder.decode(group4[0], "UTF-8");
+                String value = "";
+                if (group4.length != 1) {
+                    value = URLDecoder.decode(group4[1], "UTF-8");
+                }
+                request.parameter.put(key, value);
+            }
+        }
         request.version = group[2];
     }
 
