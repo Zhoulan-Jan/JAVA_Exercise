@@ -55,13 +55,30 @@ public class Server {
 //                    os.write(response.toString().getBytes("UTF-8"));
 //                    os.flush();
 //                }
-//            //2.处理业务 处理客人请求
-//            String body = "<h1> hello world! </h1>";
-//            //3.拼接响应 说让客人能理解的话
-//            Response response = Response.build(os);
-//            //4.发送响应 把话说出去
-//            response.println(body);
-//            response.flush();
+
+                //2.处理业务 处理客人请求
+                //String body = "<h1> hello world! </h1>";
+                //3.拼接响应 说让客人能理解的话
+                Response response = new Response();
+                //response.println(body);
+                if (request.path.equalsIgnoreCase("/js")) {
+                    Servlet servlet = new JSServlet();
+                    servlet.doGet(request, response);
+                } else if (request.path.equalsIgnoreCase("/move")) {
+                    response.setStatus("307 Temporary Redirect");
+                    response.setHeaders("Location", "https://www.qq.com/");
+                } else {
+                    response.setStatus("404 NOT FOUND");
+                    response.setHeaders("Content-Type", "text/html;charset=utf-8");
+                    response.println("<h1>没有找到页面 404 NOT FOUND</h1>");
+                }
+                response.build(os);
+
+                //Response response = Response.build(os); //这个方式不会写
+                //4.发送响应 把话说出去
+
+
+                //response.flush();
                 socket.close();
             } catch (IOException e) {
                 e.printStackTrace();

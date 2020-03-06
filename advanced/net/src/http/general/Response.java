@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Response {
-    public String version = "HTTP/1.1";
+    public String version = "HTTP/1.1 ";
     public String status;
     Map<String, String> header = new HashMap<>();
     StringBuffer body = new StringBuffer();
@@ -30,7 +30,7 @@ public class Response {
         header.put("Content-Length", String.valueOf(contentLen));
         for (Map.Entry<String, String> entry : header.entrySet()) {
             response.append(entry.getKey());
-            response.append("=");
+            response.append(":");
             response.append(entry.getValue());
             response.append("\r\n");
         }

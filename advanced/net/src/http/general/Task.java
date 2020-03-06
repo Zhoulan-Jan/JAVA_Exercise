@@ -27,7 +27,10 @@ public class Task implements Runnable {
                 servlet = new JSServlet();
             } else if (request.path.equals("/move")) {
                 servlet = new TmpRedirect();
-            } else {
+            } else if (request.path.equals("/login")) {
+                servlet = new LoginServlet();
+            }
+            else {
                 servlet = new NotFoundServlet();
             }
             servlet.doGet(request, response);

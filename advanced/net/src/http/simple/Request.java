@@ -15,7 +15,6 @@ public class Request {
     //path = c++; parameter = {name = hello}
     //请求路径
     public String path;
-
     //请求参数
     Map<String, String> parameter = new HashMap<>();
 
