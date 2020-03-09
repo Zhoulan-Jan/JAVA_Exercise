@@ -1,4 +1,4 @@
-package http.simple;
+package http.acceptable;
 
 public class JSServlet extends Servlet{
     @Override

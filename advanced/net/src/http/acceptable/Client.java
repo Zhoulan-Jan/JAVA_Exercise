@@ -1,13 +1,9 @@
-package http.simple;
-
-import jdk.swing.interop.SwingInterOpUtils;
+package http.acceptable;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.Arrays;
 import java.util.Scanner;
 
 //HTTP 客户端的功能：组织请求，解析响应
