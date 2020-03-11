@@ -1,4 +1,4 @@
-package http.general;
+package http.eexpectations;
 
 import java.io.Serializable;
 import java.util.ArrayList;

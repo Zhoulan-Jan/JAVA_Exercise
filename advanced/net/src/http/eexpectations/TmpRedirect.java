@@ -1,4 +1,4 @@
-package http.general;
+package http.eexpectations;
 
 public class TmpRedirect extends Servlet {
     @Override

@@ -1,4 +1,4 @@
-package http.general;
+package http.eexpectations;
 
 public class NotFoundServlet extends Servlet {
     @Override

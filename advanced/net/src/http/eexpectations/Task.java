@@ -1,4 +1,4 @@
-package http.general;
+package http.eexpectations;
 
 
 import java.io.IOException;
@@ -29,6 +29,8 @@ public class Task implements Runnable {
                 servlet = new TmpRedirect();
             } else if (request.path.equals("/login")) {
                 servlet = new LoginServlet();
+            } else if (request.path.equals("/hello")) {
+                servlet = new HelloServlet();
             }
             else {
                 servlet = new NotFoundServlet();
