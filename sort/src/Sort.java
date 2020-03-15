@@ -1,4 +1,4 @@
-import java.util.Arrays;
+﻿import java.util.Arrays;
 
 public class Sort {
     //选择排序
@@ -75,9 +75,9 @@ public class Sort {
             return;
         }
         int mid = (low + high) / 2;
-        mergeSortHelper(low, mid, nums);
-        mergeSortHelper(mid, high, nums);
-        merge(low, mid, high, nums);
+        mergeSortHelper(low, mid, nums); //[low, mid)
+        mergeSortHelper(mid, high, nums); //[mid, high)
+        merge(low, mid, high, nums); //[low, high) 进行合并
     }
 
     //合并
