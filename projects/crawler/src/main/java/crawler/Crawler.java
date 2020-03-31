@@ -1,6 +1,10 @@
 package crawler;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import dao.Project;
+import dao.ProjectDao;
 import okhttp3.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,13 +12,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class Crawler {
     private HashSet<String> urlBlackList = new HashSet<>();
     private OkHttpClient okHttpClient = new OkHttpClient();
+    private Gson gson = new GsonBuilder().create();
 
     {
         urlBlackList.add("https://github.com/events");
@@ -29,10 +36,32 @@ public class Crawler {
 
     public static void main(String[] args) throws IOException {
         Crawler crawler = new Crawler();
+        //1.获取入口页面
         String respBody = crawler.getPage("https://github.com/akullpp/awesome-java/blob/master/README.md");
         //System.out.println(respBody);
+
+        //2.解析入口页面，获取项目列表
         List<Project> projects = crawler.parseProjectList(respBody);
-        System.out.println(projects);
+        //System.out.println(projects);
+
+        ProjectDao projectDao = new ProjectDao();
+        //3.遍历项目列表，调用 GitHub api 获取项目信息
+        for (int i = 0; i < projects.size() && i < 5; i++) {
+            Project project = projects.get(i);
+            System.out.println("crawling..." + project.getName()+ "...");
+            String repoName = crawler.getRepoName(project.getUrl());
+            String jsonStr = crawler.getRepoInfo(repoName);
+            //System.out.println(jsonStr);
+
+            //4.解析 JSON 数据，得到 star 等信息
+            crawler.parseRepoInfo(jsonStr, project);
+
+            //5.把 project 保存到数据库中
+            projectDao.save(project);
+            System.out.println("crawling "+ project.getName() + "done~");
+//            System.out.println(project);
+//            System.out.println("===================");
+        }
     }
 
     //通过 OkHttp 这个库获取到 HTML 形式的页面内容
@@ -94,16 +123,28 @@ public class Crawler {
         return res;
     }
 
+    //从一个 url 提取出仓库名和作者名
+    //https://github.com/repos/doov-io/doov => doov-io/doov
+    public String getRepoName(String url) {
+        int lastOne = url.lastIndexOf("/");
+        int lastTwo = url.lastIndexOf("/", lastOne - 1);
+        if (lastOne == -1 || lastTwo == -1) {
+            System.out.println("当前的 url 不是一个标准的项目 url： " + url);
+            return null;
+        }
+        return url.substring(lastTwo + 1);
+    }
+
     //调用 GitHub API 获取指定的仓库信息
     //repoName 形如 doov-io/doov
     public String getRepoInfo(String repoName) throws IOException {
         String userName = "Zhoulan-Jan";
         String passwd = "Nina752426";
         //进行身份认证，将用户名密码加密（base64）之后，得到字符串，把这个字符串放到 HTTP header 中
-        String credent = Credentials.basic(userName, passwd);
-        String url = "https://api.github.com/repos" + repoName;
+        String credential = Credentials.basic(userName, passwd);
+        String url = "https://api.github.com/repos/" + repoName;
         //okHttpClient 对象前面已创建， 请求对象、Call对象、响应对象需要重新创建
-        Request request = new Request.Builder().url(url).header("Authorization", credent).build();
+        Request request = new Request.Builder().url(url).header("Authorization", credential).build();
         Call call = okHttpClient.newCall(request);
         Response response = call.execute();
         if (!response.isSuccessful()) {
@@ -113,5 +154,18 @@ public class Crawler {
         return response.body().string();
     }
 
-    public String getRepoName(String    )
+    //解析仓库的相关信息，并保存到 project 对象中
+    public void parseRepoInfo(String jsonStr, Project project) {
+        //把 JSON 数据转为 键值对 数据
+        //借助 TypeToken 这个类获取到 HashMap 所对应的类对象
+        Type type = new TypeToken<HashMap<String, Object>>(){}.getType();
+        HashMap<String, Object> map = gson.fromJson(jsonStr, type);
+        Double starCnt = (Double) map.get("stargazers_count");
+        project.setStarCnt(starCnt.intValue());
+        Double forkCnt = (Double)map.get("forks_count");
+        project.setForkCnt(forkCnt.intValue());
+        Double issuesCnt = (Double)map.get("open_issues_count");
+        project.setIssuesCnt(issuesCnt.intValue());
+    }
+
 }
