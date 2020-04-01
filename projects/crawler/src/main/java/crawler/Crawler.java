@@ -35,33 +35,54 @@ public class Crawler {
     }
 
     public static void main(String[] args) throws IOException {
-        Crawler crawler = new Crawler();
+        long startTime = System.currentTimeMillis();
+
         //1.获取入口页面
+        Crawler crawler = new Crawler();
         String respBody = crawler.getPage("https://github.com/akullpp/awesome-java/blob/master/README.md");
         //System.out.println(respBody);
+
+        long finishTime = System.currentTimeMillis();
+        System.out.println("获取入口页面时间：" + (finishTime - startTime) + " ms");
 
         //2.解析入口页面，获取项目列表
         List<Project> projects = crawler.parseProjectList(respBody);
         //System.out.println(projects);
 
-        ProjectDao projectDao = new ProjectDao();
+        System.out.println("获取项目列表时间：" + (System.currentTimeMillis() - finishTime) + " ms");
+        finishTime = System.currentTimeMillis();
+
         //3.遍历项目列表，调用 GitHub api 获取项目信息
-        for (int i = 0; i < projects.size() && i < 5; i++) {
-            Project project = projects.get(i);
-            System.out.println("crawling..." + project.getName()+ "...");
-            String repoName = crawler.getRepoName(project.getUrl());
-            String jsonStr = crawler.getRepoInfo(repoName);
-            //System.out.println(jsonStr);
+        ProjectDao projectDao = new ProjectDao();
+        for (int i = 0; i < projects.size(); i++) {
+            try {
+                Project project = projects.get(i);
+                System.out.println("crawling... " + project.getName()+ " ...");
+                String repoName = crawler.getRepoName(project.getUrl());
+                String jsonStr = crawler.getRepoInfo(repoName);
+                //System.out.println(jsonStr);
 
-            //4.解析 JSON 数据，得到 star 等信息
-            crawler.parseRepoInfo(jsonStr, project);
-
-            //5.把 project 保存到数据库中
-            projectDao.save(project);
-            System.out.println("crawling "+ project.getName() + "done~");
+                //4.解析 JSON 数据，得到 star 等信息
+                crawler.parseRepoInfo(jsonStr, project);
+                System.out.println("crawling "+ project.getName() + " done~");
 //            System.out.println(project);
 //            System.out.println("===================");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        System.out.println("获取项目信息：" + (System.currentTimeMillis() - finishTime) + " ms");
+        finishTime = System.currentTimeMillis();
+
+        //5.把 project 保存到数据库中
+        for (int i = 0; i < projects.size(); i++) {
+            Project project = projects.get(i);
+            projectDao.save(project);
+        }
+
+        System.out.println("保存到数据库时间：" + (System.currentTimeMillis() - finishTime) + " ms");
+        finishTime = System.currentTimeMillis();
+        System.out.println("总时间：" + (finishTime - startTime) + " ms");
     }
 
     //通过 OkHttp 这个库获取到 HTML 形式的页面内容
@@ -125,6 +146,8 @@ public class Crawler {
 
     //从一个 url 提取出仓库名和作者名
     //https://github.com/repos/doov-io/doov => doov-io/doov
+    //特殊情况 ： https://github.com/networknt/light-4j/
+    //https://github.com/codenameone/CodenameOne/tree/master/vm  等
     public String getRepoName(String url) {
         int lastOne = url.lastIndexOf("/");
         int lastTwo = url.lastIndexOf("/", lastOne - 1);
