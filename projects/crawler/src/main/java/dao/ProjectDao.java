@@ -48,6 +48,7 @@ public class ProjectDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, date);
             resultSet = preparedStatement.executeQuery();

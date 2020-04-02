@@ -60,13 +60,13 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
+        return  "Project{" +
                 "name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
                 ", starCnt=" + starCnt +
                 ", forkCnt=" + forkCnt +
-                ", issueCnt=" + issuesCnt  +
+                ", issuesCnt=" + issuesCnt  +
                 '}';
     }
 }

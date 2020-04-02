@@ -11,7 +11,7 @@ import java.sql.SQLException;
 //单例类，管理数据库的连接
 public class DBUtil {
     //先部署在云服务器上才能运行
-    private static String URL = "jdbc:mysql://127.0.0.1:3306/github_crawler?characterEncoding=utf-8";
+    private static String URL = "jdbc:mysql://127.0.0.1:3306/github_crawler?characterEncoding=utf-8&useSSL=true";
     private static String USERNAME = "root";
     private static String PASSWORD = "123456";
 
