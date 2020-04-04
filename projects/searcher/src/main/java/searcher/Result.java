@@ -4,7 +4,7 @@ package searcher;
 public class Result {
     private String title;
     private String showUrl;
-    private String clickUrl;
+    private String clickUrl; //实际浏览器中，点击URL 会把请求打到搜狗服务器上，服务器会重定向到展示URL
     private String desc;
 
     public String getTitle() {
@@ -37,5 +37,15 @@ public class Result {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "title='" + title + '\'' +
+                ", showUrl='" + showUrl + '\'' +
+                ", clickUrl='" + clickUrl + '\'' +
+                ", desc='" + desc + '\'' +
+                '}';
     }
 }

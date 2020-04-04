@@ -1,5 +1,7 @@
 package api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import searcher.Result;
 import searcher.Searcher;
 
@@ -12,15 +14,22 @@ import java.util.List;
 
 public class DocSearcherServlet extends HttpServlet {
     private Searcher searcher = new Searcher();
+    private Gson gson = new GsonBuilder().create();
 
     public DocSearcherServlet() throws IOException {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json; character=utf-8");
         String query = req.getParameter("query");
+        if (query == null || query.equals("")) {
+            resp.setStatus(404);
+            resp.getWriter().write("query 参数错误");
+            return;
+        }
         List<Result> results = searcher.search(query);
-
+        String respStr = gson.toJson(results);
+        resp.getWriter().write(respStr);
     }
 }
