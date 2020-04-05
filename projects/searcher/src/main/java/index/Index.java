@@ -47,7 +47,7 @@ public class Index {
                 Timer timer = new Timer();
 
                 long startTime = System.currentTimeMillis();
-                System.out.println("build start!");
+                //System.out.println("build start!");
 
                 //1.打开文件，按行读取文件内容
                 BufferedReader br = new BufferedReader(new FileReader(new File(inputPath)));
