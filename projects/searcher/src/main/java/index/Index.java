@@ -40,7 +40,7 @@ public class Index {
         //构建索引，把 raw_data.txt 文件内容读出来，加载到上述的数据结构中
         public void build(String inputPath) throws IOException {
                 class Timer {
-                        public long redFileTime;
+                        public long readFileTime;
                         public long buildForwardTime;
                         public long buildInvertedTime;
                 }
