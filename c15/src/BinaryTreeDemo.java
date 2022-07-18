@@ -61,7 +61,7 @@ public class BinaryTreeDemo {
             //遇到空，出栈，
             TreeNode tmp = stack.pop();
             list.add(tmp.val);
-            //cur指向出栈元素的右子树（为空的话，继续出栈）（不为空就一直往左）
+            //cur指向出栈元素的右子树（为空的话，继续出栈）（不为空就一直往左继续入栈）
             cur = tmp.right;
         }
         return list;
@@ -96,6 +96,24 @@ public class BinaryTreeDemo {
             }
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        BinaryTreeDemo a = new BinaryTreeDemo();
+        TreeNode root = new TreeNode(1);
+        TreeNode two = new TreeNode(2);
+        TreeNode three = new TreeNode(3);
+        TreeNode four = new TreeNode(4);
+        TreeNode seven = new TreeNode(7);
+
+        root.left = two;
+        root.right = three;
+        two.left = four;
+        four.right = seven;
+
+        System.out.println(a.preorderTraversal(root));
+        System.out.println(a.inorderTraversal(root));
+        System.out.println(a.postorderTraversal(root));
     }
 }
 
